@@ -17,12 +17,30 @@ function solveEquation(a, b, c) {
   return arr; // array
 }
 
+function checkNumber(parameter, value) {
+  let result = true;
+  
+  if ((!(+value) || (value < 0)) && (value != 0)) {
+    alert(`Параметр ${parameter} содержит неправильное значение ${value}`)
+    result = false;
+  }
+
+  return result;
+}
+
+
 function calculateTotalMortgage(percent, contribution, amount, date) {
   'use strict'
+
+  if ((checkNumber('процент', percent) === true) && (checkNumber('первый взнос', contribution) === true) && (checkNumber('сумма', amount) === true)) {  
+    let today = new Date();
+    let countMonth = (date.getFullYear() - today.getFullYear()) * 12 + (date.getMonth() - today.getMonth());
+    let P = (percent / 12) / 100;
+    let S = amount - contribution;
+    let totalAmount = (countMonth * (S * ( P + P / ((( 1 + P ) ** countMonth) - 1 )))).toFixed(2);
   
-  let totalAmount;
+    console.log(totalAmount);
 
-  // код для задачи №2 писать здесь
-
-  return totalAmount;
+    return totalAmount;
+  }  
 }
