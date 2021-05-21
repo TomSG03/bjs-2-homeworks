@@ -20,7 +20,7 @@ function solveEquation(a, b, c) {
 function checkNumber(parameter, value) {
   let result = true;
   
-  if ((!(+value) || (value < 0)) && (value != 0)) {
+  if (isNaN(value) || (value < 0)) {
     alert(`Параметр ${parameter} содержит неправильное значение ${value}`)
     result = false;
   }
@@ -41,6 +41,6 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   
     console.log(totalAmount);
 
-    return totalAmount;
+    return Number(totalAmount);
   }  
 }
