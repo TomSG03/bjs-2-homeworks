@@ -1,15 +1,18 @@
 function compareArrays(arr1, arr2) {
-  let result;
+  //let result = false;
 
-  // Ваш код
+  //if (arr1.length === arr2.length) {
+  //  let compareArr = arr1.every((n, i) => n === arr2[i]);   //  Это тоже работаетю. Оставлю на всякий случай.
+  //  if (compareArr === true) {
+  //    result = true
+  // }
+  //}
 
-  return result; // boolean
+  //return result; // boolean
+
+  return arr1.length === arr2.length && arr1.every((n, i) => n === arr2[i]);
 }
 
 function advancedFilter(arr) {
-  let arr;
-
-  // Ваш код
-
-  return arr;
+  return arr.filter((item) => item >= 0).filter((item) => (item % 3) === 0).map((item) => item * 10);
 }
