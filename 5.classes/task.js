@@ -209,76 +209,130 @@ console.log("Количество книг после выдачи: " + library.
 
 //Задача №3. Журнал успеваемости
 
+// class StudentLog {
+//   constructor (name, gender = 'male', age = 18) {
+//     this.name = name;
+//     this.gender = gender;
+//     this.age = age; 
+//     this.marks = [];
+//   }
+
+//   getName() {
+//     return this.name;
+//   }
+
+//   setSubject(subjectName) {
+//      this.subject = subjectName;
+//   }
+
+//   addGrade(mark, subject)  {
+//     if (mark >= 1 && mark <= 5) {
+//       let pos;
+//       let result = this.marks.find(function(item, index) {
+//         pos = index;
+//         return item.subject === subject
+//       });
+//       if(!result) {
+//         let score = {
+//           marks: [],
+//           subject: subject
+//         }
+//         score.marks.push(mark);
+//         this.marks.push(score);
+//       }
+//       else {
+//         this.marks[pos].marks.push(mark);
+//       }  
+//     } else {
+//       console.log('Ошибка, оценка должна быть числом от 1 до 5');
+//     }
+    
+//   }
+
+//   getTotalAverage()  {
+//     let sum = 0;
+//     let totalLength = 0;  
+
+//     if(this.marks === undefined) {
+//       alert('Нет массива оценок!');
+//     }
+//     else {
+//       let k = this.marks.length;
+//       for (let i = 0; i < k; i++) {
+//         let j = this.marks[i].marks.length;
+//         totalLength = totalLength + j;       
+//         for (let n = 0; n < j; n++) {
+//           sum = sum + this.marks[i].marks[n];
+//         }
+//       }
+//     }
+//     return sum / totalLength;
+//   }
+
+//   getAverageBySubject(subject) {
+//     let pos;
+//     let result = this.marks.find(function(item, index) {
+//       pos = index;
+//       return item.subject === subject
+//     });
+//     if(result) {
+//       let summa = 0;
+//       this.marks[pos].marks.forEach(element => summa += element);
+//       return summa / this.marks[pos].marks.length
+//     }
+//     else {
+//       console.log(`Предмет не найден: ${subject}`);
+//     }
+//   }
+  
+//   exclude(reason) {
+//     delete this.subject;
+//     delete this.marks;
+//     this.excluded = reason;
+//   }
+
 class StudentLog {
   constructor (name, gender = 'male', age = 18) {
     this.name = name;
     this.gender = gender;
     this.age = age; 
-    this.marks = [];
+    this.marks = {};
   }
 
   getName() {
     return this.name;
   }
 
-  setSubject(subjectName) {
-     this.subject = subjectName;
-  }
-
   addGrade(mark, subject)  {
+    
+    if(!this.marks[subject]) {
+      this.marks[subject] = [];
+    }  
     if (mark >= 1 && mark <= 5) {
-      let pos;
-      let result = this.marks.find(function(item, index) {
-        pos = index;
-        return item.subject === subject
-      });
-      if(!result) {
-        let score = {
-          marks: [],
-          subject: subject
-        }
-        score.marks.push(mark);
-        this.marks.push(score);
-      }
-      else {
-        this.marks[pos].marks.push(mark);
-      }  
-    } else {
+      this.marks[subject].push(mark);
+    }  
+    else {
       console.log('Ошибка, оценка должна быть числом от 1 до 5');
     }
-    
   }
+
 
   getTotalAverage()  {
     let sum = 0;
-    let totalLength = 0;  
+    let total = 0;
 
-    if(this.marks === undefined) {
-      alert('Нет массива оценок!');
+    for (const key in this.marks) {
+      sum = sum + this.getAverageBySubject(key);  
+      total++;
     }
-    else {
-      let k = this.marks.length;
-      for (let i = 0; i < k; i++) {
-        let j = this.marks[i].marks.length;
-        totalLength = totalLength + j;       
-        for (let n = 0; n < j; n++) {
-          sum = sum + this.marks[i].marks[n];
-        }
-      }
-    }
-    return sum / totalLength;
+    return sum / total;
   }
 
   getAverageBySubject(subject) {
-    let pos;
-    let result = this.marks.find(function(item, index) {
-      pos = index;
-      return item.subject === subject
-    });
-    if(result) {
+    if(this.marks[subject]) {
       let summa = 0;
-      this.marks[pos].marks.forEach(element => summa += element);
-      return summa / this.marks[pos].marks.length
+      this.marks[subject].forEach(element => summa += element);
+      return summa / this.marks[subject].length
     }
     else {
       console.log(`Предмет не найден: ${subject}`);
@@ -304,6 +358,3 @@ studentLog.getAverageBySubject('geometry'); // Средний балл по пр
 studentLog.getAverageBySubject('biology'); // Несуществующий предмет
 studentLog.getTotalAverage(); // Средний балл по всем предметам 4.75
 studentLog.exclude('Исключен за попытку подделать оценки');
-
-
-
