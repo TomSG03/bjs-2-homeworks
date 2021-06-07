@@ -58,7 +58,7 @@ Student.prototype.getAverage = function ()  {
     // for (let index = 0; index < this.marks.length; index++) {
     //   summa += this.marks[index];
     // }
-    // return Number(summa / this.marks.length).toFixed(2);
+    return Number(summa / this.marks.length).toFixed(2);
   }
 }
 
