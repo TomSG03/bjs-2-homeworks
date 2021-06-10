@@ -1,7 +1,8 @@
 //Задача №1. Форматтер чисел
 
 parseCount = (value) => { 
-  if (Number.isNaN(result = Number.parseInt(value))) {
+  let result = Number.parseInt(value)
+  if (Number.isNaN(result)) {
     throw new Error("Невалидное значение") 
   }  
   return result;
@@ -9,11 +10,10 @@ parseCount = (value) => {
 
 function validateCount(value) {
   try {
-    result = parseCount(value);
+    return parseCount(value);
   } catch (error) {
-    result = error;
+    return error;
   }
-  return result;
 }
 
 // console.log(parseCount('90'));
@@ -25,14 +25,13 @@ function validateCount(value) {
 
 class Triangle {
   constructor(a, b, c) {
-    if (a < b + c && b < a + c && c < a + b) {
-      this.a = a;
-      this.b = b;
-      this.c = c;
-    }
-    else {
+    if (!(a < b + c && b < a + c && c < a + b)) {
       throw new Error('Треугольник с такими сторонами не существует');
+
     }
+    this.a = a;
+    this.b = b;
+    this.c = c;
   }
 
   getPerimeter() {
