@@ -1,15 +1,28 @@
-function compareArrays(arr1, arr2) {
-  let result;
+function cachingDecoratorNew(func) {
+  let cache = {};
 
-  // Ваш код
+  function wrapper(...args) {
+      const hash = args.join(',');
 
-  return result; // boolean
+      if (hash in cache) {
+          console.log("Из кеша: " + cache[hash]);
+          return "Из кеша: " + cache[hash];
+      } else {
+          let result = func(...args);
+          cache[hash] = result;
+          console.log("Вычисляем: " + result);
+          return "Вычисляем: " + result;
+      }
+  }
+
+  return wrapper;
 }
 
-function advancedFilter(arr) {
-  let resultArr;
 
+function debounceDecoratorNew(func) {
   // Ваш код
+}
 
-  return resultArr; // array
+function debounceDecorator2(func) {
+  // Ваш код
 }
