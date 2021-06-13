@@ -291,7 +291,7 @@ console.log("Количество книг после выдачи: " + library.
 //     this.excluded = reason;
 //   }
 
-class StudentLog {
+class Student {
   constructor (name, gender = 'male', age = 18) {
     this.name = name;
     this.gender = gender;
@@ -317,7 +317,7 @@ class StudentLog {
   }
 
 
-  getTotalAverage()  {
+  getAverage()  {
     let sum = 0;
     let total = 0;
 
@@ -325,7 +325,7 @@ class StudentLog {
       sum = sum + this.getAverageBySubject(key);  
       total++;
     }
-    return sum / total;
+    return Number((sum / total).toFixed(1));
   }
 
   getAverageBySubject(subject) {
@@ -347,7 +347,7 @@ class StudentLog {
 
 }
 
-const studentLog = new StudentLog('Олег Никифоров');
+const studentLog = new Student('Олег Никифоров');
 studentLog.addGrade(5, 'algebra');
 studentLog.addGrade(5, 'algebra');
 studentLog.addGrade(5, 'geometry');
@@ -356,5 +356,5 @@ studentLog.addGrade(6, 'geometry'); // "Ошибка, оценка должна 
 studentLog.getAverageBySubject('algebra'); // Средний балл по предмету algebra 5
 studentLog.getAverageBySubject('geometry'); // Средний балл по предмету geometry 4.5
 studentLog.getAverageBySubject('biology'); // Несуществующий предмет
-studentLog.getTotalAverage(); // Средний балл по всем предметам 4.75
+studentLog.getAverage(); // Средний балл по всем предметам 4.75
 studentLog.exclude('Исключен за попытку подделать оценки');
